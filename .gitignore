@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# dbt
+taxi_analytics/target/
+taxi_analytics/dbt_packages/
+taxi_analytics/logs/
+taxi_analytics/taxi_analytics.duckdb
+taxi_analytics/taxi_analytics.duckdb.wal
+
+# Raw data (re-download with `python data/download.py`)
+data/raw/*.parquet
+data/raw/*.csv
+!data/raw/.gitkeep
+
+# Results are generated artifacts (CSVs/MD rebuilt by scripts/run_questions.py)
+# (kept in repo for portfolio readability — comment out to ignore)

@@ -1,0 +1,3 @@
+day_type,trips,revenue_usd,avg_total_per_trip_usd,avg_distance_miles
+weekday,6744086,188491099.68,27.95,4.07
+weekend,2670973,71040120.79,26.6,4.0

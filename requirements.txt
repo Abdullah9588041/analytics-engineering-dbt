@@ -1,0 +1,7 @@
+# Pinned runtime + dev dependencies (verified 2026-10-06, Python 3.12).
+# dbt-core 1.12.5 + dbt-duckdb 1.11.0 install cleanly together.
+dbt-core==1.12.5
+dbt-duckdb==1.11.0
+duckdb==1.5.6
+pytest==9.1.1
+PyYAML==6.0.3

@@ -1,0 +1,90 @@
+version: 2
+
+seeds:
+  - name: taxi_zone_lookup
+    description: Official NYC TLC taxi zone lookup (LocationID -> borough/zone).
+    columns:
+      - name: LocationID
+        tests: [not_null, unique]
+      - name: Borough
+      - name: Zone
+      - name: service_zone
+
+models:
+  - name: stg_yellow_tripdata
+    description: Cleaned NYC Yellow Taxi trips, Jan–Mar 2024. One row per trip after dedupe and validity filtering.
+    columns:
+      - name: trip_key
+        description: Surrogate key (md5 over the natural key).
+        tests: [not_null, unique]
+      - name: pickup_datetime
+        tests: [not_null]
+      - name: dropoff_datetime
+        tests: [not_null]
+      - name: fare_amount
+      - name: total_amount
+
+  - name: dim_zones
+    description: Taxi zone dimension from the TLC lookup.
+    columns:
+      - name: zone_key
+        tests: [not_null, unique]
+      - name: zone_id
+        tests: [not_null, unique]
+      - name: borough
+      - name: zone_name
+
+  - name: dim_payment_type
+    description: Payment-type dimension (1=Credit card, 2=Cash, ...).
+    columns:
+      - name: payment_key
+        tests: [not_null, unique]
+      - name: payment_type
+        tests: [not_null, unique]
+
+  - name: fact_trips
+    description: Fact table at trip grain with zone/payment keys and derived measures.
+    columns:
+      - name: trip_key
+        tests: [not_null, unique]
+      - name: pickup_zone_key
+        tests:
+          - relationships:
+              to: ref('dim_zones')
+              field: zone_key
+      - name: dropoff_zone_key
+        tests:
+          - relationships:
+              to: ref('dim_zones')
+              field: zone_key
+      - name: payment_type
+        tests:
+          - relationships:
+              to: ref('dim_payment_type')
+              field: payment_type
+      - name: total_amount
+      - name: pickup_datetime
+        tests: [not_null]
+
+  - name: mart_hourly_demand
+    description: Pickups/revenue by hour and day-of-week with windowed demand context.
+    columns:
+      - name: pickup_hour
+        tests: [not_null, unique]
+      - name: trips
+
+  - name: mart_revenue_by_zone
+    description: Revenue by pickup zone with rank and concentration measures.
+    columns:
+      - name: borough
+        tests: [not_null]
+      - name: zone_name
+        tests: [not_null]
+
+  - name: mart_tip_analysis
+    description: Tipping behavior by payment type and hour.
+    columns:
+      - name: payment_type
+        tests: [not_null]
+      - name: pickup_hour
+        tests: [not_null]

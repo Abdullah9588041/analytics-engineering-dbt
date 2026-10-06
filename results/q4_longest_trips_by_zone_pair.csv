@@ -1,0 +1,16 @@
+pickup_zone,dropoff_zone,trips,avg_distance_miles,avg_total_usd
+JFK Airport,Riverdale/North Riverdale/Fieldston,518,26.38,126.36
+JFK Airport,Spuyten Duyvil/Kingsbridge,527,24.56,117.04
+Battery Park City,JFK Airport,865,24.12,94.07
+JFK Airport,Sunset Park West,740,23.69,105.65
+JFK Airport,Battery Park City,2285,23.49,95.39
+JFK Airport,Carroll Gardens,1267,23.47,109.48
+JFK Airport,World Trade Center,2547,23.06,94.13
+JFK Airport,Windsor Terrace,825,22.86,105.45
+East Elmhurst,Outside of NYC,578,22.29,137.69
+LaGuardia Airport,Outside of NYC,4341,22.27,139.97
+JFK Airport,Cobble Hill,820,22.25,105.43
+JFK Airport,Inwood,550,21.95,92.18
+Meatpacking/West Village West,JFK Airport,663,21.95,95.39
+JFK Airport,Financial District South,1068,21.94,93.53
+World Trade Center,JFK Airport,906,21.79,91.2
